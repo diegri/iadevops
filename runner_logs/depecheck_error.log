@@ -1,0 +1,79 @@
+﻿2025-04-09T13:34:09.3794190Z ##[group]Run dependency-check/Dependency-Check_Action@main
+2025-04-09T13:34:09.3794521Z with:
+2025-04-09T13:34:09.3794684Z   project: test
+2025-04-09T13:34:09.3794905Z   path: /home/runner/work/github-test/github-test
+2025-04-09T13:34:09.3795158Z   format: HTML
+2025-04-09T13:34:09.3795317Z   out: reports
+2025-04-09T13:34:09.3795532Z   args: --failOnCVSS 7 --enableRetired
+
+2025-04-09T13:34:09.3795780Z ##[endgroup]
+2025-04-09T13:34:09.3917720Z ##[command]/usr/bin/docker run --name e7928d5c8a0003b4a89b25b5a60c144c1d6_39e84c --label 391e79 --workdir /github/workspace --rm -e "INPUT_PROJECT" -e "INPUT_PATH" -e "INPUT_FORMAT" -e "INPUT_OUT" -e "INPUT_ARGS" -e "HOME" -e "GITHUB_JOB" -e "GITHUB_REF" -e "GITHUB_SHA" -e "GITHUB_REPOSITORY" -e "GITHUB_REPOSITORY_OWNER" -e "GITHUB_REPOSITORY_OWNER_ID" -e "GITHUB_RUN_ID" -e "GITHUB_RUN_NUMBER" -e "GITHUB_RETENTION_DAYS" -e "GITHUB_RUN_ATTEMPT" -e "GITHUB_ACTOR_ID" -e "GITHUB_ACTOR" -e "GITHUB_WORKFLOW" -e "GITHUB_HEAD_REF" -e "GITHUB_BASE_REF" -e "GITHUB_EVENT_NAME" -e "GITHUB_SERVER_URL" -e "GITHUB_API_URL" -e "GITHUB_GRAPHQL_URL" -e "GITHUB_REF_NAME" -e "GITHUB_REF_PROTECTED" -e "GITHUB_REF_TYPE" -e "GITHUB_WORKFLOW_REF" -e "GITHUB_WORKFLOW_SHA" -e "GITHUB_REPOSITORY_ID" -e "GITHUB_TRIGGERING_ACTOR" -e "GITHUB_WORKSPACE" -e "GITHUB_ACTION" -e "GITHUB_EVENT_PATH" -e "GITHUB_ACTION_REPOSITORY" -e "GITHUB_ACTION_REF" -e "GITHUB_PATH" -e "GITHUB_ENV" -e "GITHUB_STEP_SUMMARY" -e "GITHUB_STATE" -e "GITHUB_OUTPUT" -e "RUNNER_OS" -e "RUNNER_ARCH" -e "RUNNER_NAME" -e "RUNNER_ENVIRONMENT" -e "RUNNER_TOOL_CACHE" -e "RUNNER_TEMP" -e "RUNNER_WORKSPACE" -e "ACTIONS_RUNTIME_URL" -e "ACTIONS_RUNTIME_TOKEN" -e "ACTIONS_CACHE_URL" -e "ACTIONS_RESULTS_URL" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/github-test/github-test":"/github/workspace" 391e79:28d5c8a0003b4a89b25b5a60c144c1d6  "--project" "test" "--scan" "/github/workspace//home/runner/work/github-test/github-test" "--format" "HTML" "--out" "/github/workspace/reports" "--noupdate" "--failOnCVSS 7 --enableRetired
+"
+2025-04-09T13:34:10.1609563Z Invalid 'scan' argument: '/github/workspace//home/runner/work/github-test/github-test' - path does not exist
+2025-04-09T13:34:10.1651323Z usage: Dependency-Check Core [--advancedHelp] [--disableVersionCheck]
+2025-04-09T13:34:10.1652065Z        [--enableExperimental] [--exclude <pattern>] [-f <format>]
+2025-04-09T13:34:10.1653085Z        [--failOnCVSS <score>] [-h] [--junitFailOnCVSS <score>] [-l <file>]
+2025-04-09T13:34:10.1653986Z        [-n] [--nvdApiKey <apiKey>] [-o <path>] [--prettyPrint] [--project
+2025-04-09T13:34:10.1654908Z        <name>] [-s <path>] [--suppression <file>] [-v]
+2025-04-09T13:34:10.1656715Z 
+2025-04-09T13:34:10.1657492Z Dependency-Check Core can be used to identify if there are any known CVE
+2025-04-09T13:34:10.1658538Z vulnerabilities in libraries utilized by an application. Dependency-Check
+2025-04-09T13:34:10.1660721Z Core will automatically update required data from the Internet, such as
+2025-04-09T13:34:10.1661392Z the CVE and CPE data files from nvd.nist.gov.
+2025-04-09T13:34:10.1661718Z 
+2025-04-09T13:34:10.1661971Z     --advancedHelp              Print the advanced help message.
+2025-04-09T13:34:10.1662685Z     --disableVersionCheck       Disables the dependency-check version
+2025-04-09T13:34:10.1663259Z                                 check
+2025-04-09T13:34:10.1663790Z     --enableExperimental        Enables the experimental analyzers.
+2025-04-09T13:34:10.1664504Z     --exclude <pattern>         Specify an exclusion pattern. This option
+2025-04-09T13:34:10.1665112Z                                 can be specified multiple times and it
+2025-04-09T13:34:10.1665585Z                                 accepts Ant style exclusions.
+2025-04-09T13:34:10.1666481Z  -f,--format <format>           The report format (HTML, XML, CSV, JSON,
+2025-04-09T13:34:10.1667141Z                                 JUNIT, SARIF, JENKINS, GITLAB or ALL). The
+2025-04-09T13:34:10.1667793Z                                 default is HTML. Multiple format
+2025-04-09T13:34:10.1668257Z                                 parameters can be specified.
+2025-04-09T13:34:10.1668664Z     --failOnCVSS <score>        Specifies if the build should be failed if
+2025-04-09T13:34:10.1669044Z                                 a CVSS score above a specified level is
+2025-04-09T13:34:10.1669337Z                                 identified. The default is 11; since the
+2025-04-09T13:34:10.1669834Z                                 CVSS scores are 0-10, by default the build
+2025-04-09T13:34:10.1670320Z                                 will never fail.
+2025-04-09T13:34:10.1670797Z  -h,--help                      Print this message.
+2025-04-09T13:34:10.1671702Z     --junitFailOnCVSS <score>   Specifies the CVSS score that is
+2025-04-09T13:34:10.1672339Z                                 considered a failure when generating the
+2025-04-09T13:34:10.1672851Z                                 junit report. The default is 0.
+2025-04-09T13:34:10.1673431Z  -l,--log <file>                The file path to write verbose logging
+2025-04-09T13:34:10.1673962Z                                 information.
+2025-04-09T13:34:10.1674501Z  -n,--noupdate                  Disables the automatic updating of the
+2025-04-09T13:34:10.1675082Z                                 NVD-CVE, hosted-suppressions and RetireJS
+2025-04-09T13:34:10.1675375Z                                 data.
+2025-04-09T13:34:10.1675676Z     --nvdApiKey <apiKey>        The API Key to access the NVD API.
+2025-04-09T13:34:10.1676047Z  -o,--out <path>                The folder to write reports to. This
+2025-04-09T13:34:10.1676365Z                                 defaults to the current directory. It is
+2025-04-09T13:34:10.1676652Z                                 possible to set this to a specific file
+2025-04-09T13:34:10.1676950Z                                 name if the format argument is not set to
+2025-04-09T13:34:10.1677202Z                                 ALL.
+2025-04-09T13:34:10.1677876Z     --prettyPrint               When specified the JSON and XML report
+2025-04-09T13:34:10.1678207Z                                 formats will be pretty printed.
+2025-04-09T13:34:10.1678538Z     --project <name>            The name of the project being scanned.
+2025-04-09T13:34:10.1678895Z  -s,--scan <path>               The path to scan - this option can be
+2025-04-09T13:34:10.1679210Z                                 specified multiple times. Ant style paths
+2025-04-09T13:34:10.1679704Z                                 are supported (e.g. 'path/**/*.jar'); if
+2025-04-09T13:34:10.1679978Z                                 using Ant style paths it is highly
+2025-04-09T13:34:10.1680258Z                                 recommended to quote the argument value.
+2025-04-09T13:34:10.1680599Z     --suppression <file>        The file path to the suppression XML file.
+2025-04-09T13:34:10.1680936Z                                 This can be specified more then once to
+2025-04-09T13:34:10.1681472Z                                 utilize multiple suppression files
+2025-04-09T13:34:10.1681772Z  -v,--version                   Print the version information.
+2025-04-09T13:34:10.2638279Z Post job cleanup.
+2025-04-09T13:34:10.3546740Z [command]/usr/bin/git version
+2025-04-09T13:34:10.3587913Z git version 2.49.0
+2025-04-09T13:34:10.3633534Z Temporarily overriding HOME='/home/runner/work/_temp/52ed551b-b906-416f-94c1-0a4cd3eeb904' before making global git config changes
+2025-04-09T13:34:10.3634291Z Adding repository directory to the temporary git global config as a safe directory
+2025-04-09T13:34:10.3637953Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/github-test/github-test
+2025-04-09T13:34:10.3672779Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-04-09T13:34:10.3705187Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-04-09T13:34:10.3939909Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-04-09T13:34:10.3964215Z http.https://github.com/.extraheader
+2025-04-09T13:34:10.3974802Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2025-04-09T13:34:10.4006346Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-04-09T13:34:10.4379729Z Cleaning up orphan processes

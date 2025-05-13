@@ -1,0 +1,167 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "f4658520-283f-48f9-87af-55e4ff9debef",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "61927fdb-5d6e-47c2-aa73-bb48e46d41ad",
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-1.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        100,
+        240
+      ],
+      "id": "d18abec4-8710-4ff8-b61c-363e89ecfd0d",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "MunNQKIkusAG5dC7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Executes a docker command on the host",
+        "command": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Command', ``, 'string') }}"
+      },
+      "type": "n8n-nodes-base.executeCommandTool",
+      "typeVersion": 1,
+      "position": [
+        640,
+        240
+      ],
+      "id": "056a9eb0-1c78-4741-bb80-985961fa2a08",
+      "name": "Execute Command"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get basic docker commands",
+        "url": "https://medium.com/@ravipatel.it/mastering-docker-top-50-important-commands-explained-with-examples-98bcf77e0169"
+      },
+      "id": "018e5c69-91fd-4e71-a073-1f95c1a5422a",
+      "name": "Basic docker commands",
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "position": [
+        320,
+        240
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get list of docker images",
+        "url": "https://www.bitdoze.com/docker-containers-home-server/"
+      },
+      "id": "acdb9c49-b31f-4781-8ce8-2786a7565bb1",
+      "name": "Basic list docker images",
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "position": [
+        480,
+        240
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an AI Docker System Administrator Agent expert designed to help manage Docker environments on Linux systems.\nThe user will communicate with you as a fellow DevOps engineer. You must understand their final intention and act accordingly.\nYou can execute single-line Docker CLI commands inside the same host.\nTo pass a command to execute, you should only pass the command itself.\nReplacing null with the command you want to execute.\n\nYour objectives are:\n\n1. Understand User Intent\nParse user requests related to Docker operations (containers, images, volumes, networks, etc.).\nAccurately interpret the intent to generate valid Docker CLI commands.\nAccurately interpret the output received from Docker and explain it to the user.\nHelp the user troubleshoot and resolve Docker-related issues.\n\n2. Refer to tools\nDocker CLI\nDocker Compose (if explicitly requested)\n\n3. Restrictions\nDo not perform destructive operations (e.g., docker rm -f, docker volume rm, docker system prune) without explicit confirmation.\nUnder no circumstances should you delete user data or system-critical containers/images without user approval.\n\n4. Behavior Guidelines\nBe concise, precise, and consistent.\nEnsure all generated commands are compatible with standard Docker installations on Linux.\nUse default Docker behavior when user input is incomplete, but clearly indicate assumptions.\n\nFor unknown or unrelated queries, clearly indicate invalid input.\n\nUser Prompt\nHere is a request from user: {{ $json.chatInput }}\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        180,
+        0
+      ],
+      "id": "9e3050e2-54f2-4675-93ee-534206c195c7",
+      "name": "AI Agent"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic docker commands": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic list docker images": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": -1
+  },
+  "versionId": "6ea22341-cac6-4cc6-bfaa-e6d363195eb8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "be0fcbf6bcc5fd2d69c360db1ef8b4d80bad73004b5b051e4b004a4af2d3dce5"
+  },
+  "id": "NJ4x9Sz5uq2RGNke",
+  "tags": []
+}

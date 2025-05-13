@@ -1,0 +1,37 @@
+version: '2.2'
+services:
+
+  runner:
+    build:
+      context: .\runner
+      dockerfile: Dockerfile
+    container_name: runner
+    environment:
+      REPO: ${REPO}
+      RUNNER_TOKEN: ${RUNNER_TOKEN}
+      RUNNER_NAME: demo-runner
+    # volumes:
+    #   - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - pipelinesample
+
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    restart: unless-stopped
+    networks:
+      - pipelinesample
+
+
+volumes:
+    ollama:
+      driver: local
+#   demoapp:
+#     driver: local
+
+networks:
+  pipelinesample:

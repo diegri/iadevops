@@ -1,0 +1,38 @@
+# Use Case: Basic Installation
+services:
+  # Project URL: https://github.com/n8n-io/n8n
+  # Docs URL: https://docs.n8n.io/
+  n8n:
+    #image: docker.n8n.io/n8nio/n8n
+    build:
+      context: .\n8n_with_docker
+      dockerfile: Dockerfile
+    container_name: "n8n"
+    restart: always
+    networks: ['demo_n8n']
+    environment:
+      # *** General ***
+      - GENERIC_TIMEZONE=Europe/Madrid
+      - TZ=Europe/Madrid
+      - NODE_ENV=production
+      - N8N_RUNNERS_ENABLED=true
+      - N8N_RUNNERS_MODE=internal
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+    ports:
+      - 5678:5678
+    volumes:
+      # *** General configuration ***
+      # Access to Docker on host machine
+      # - /var/run/docker.sock:/var/run/docker.sock:ro # Read only access to Docker socket
+      - /var/run/docker.sock:/var/run/docker.sock
+      # *** Volume configuration ***
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  n8n_data:
+    driver: local
+    
+networks:
+  demo_n8n:
+    name: demo_n8n
+    #driver: bridge
