@@ -66,8 +66,15 @@
 
 
 # Demos - Parte 2
-1. Validar consistencia terraform plan output
-2. Generar con IA readme documentando los componentes de la arquitectura a desplegar
+
+## Demo 2.1. Validar consistencia terraform plan output
+
+!!
+
+## Demo 2.1b Generar con IA readme documentando los componentes de la arquitectura a desplegar
+
+!!
+
 
 ## Demo 2.2 - Assitente DevOps
 
@@ -92,10 +99,15 @@
 
 # Demos - Parte 3
 
-## Demo 3.1
+## Demo 3.1 - Monitoreo inteligente
+
+1. Levantar dockers
+
+       docker-compose -f .\docker-compose.monitoring.yml up -d
 
 
-## Demo 3.2
+
+## Demo 3.2 - ??
 
 
 
