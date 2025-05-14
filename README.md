@@ -9,69 +9,85 @@
 
 ## Demo 1.1 - Escribimos código con Copilot
 
-1- Fork a repo Privado
+1. Fork a repo Privado
 
-Repo: https://github.com/diegri/java-web-sample
+    Repo: https://github.com/diegri/java-web-sample
 
-2- Clone Repo en VS Code
+2. Clone Repo en VS Code
 
-3- Ejecutar Build en local (Opcional)
+3. Ejecutar Build en local (Opcional)
 
-    docker run -it --rm -v .:/usr/src/javawebsample -v $HOME/.m2:/root/.m2 -w /usr/src/javawebsample maven:3.8.6-openjdk-11 mvn clean install
+       docker run -it --rm -v .:/usr/src/javawebsample -v $HOME/.m2:/root/.m2 -w /usr/src/javawebsample maven:3.8.6-openjdk-11 mvn clean install
 
-4- Agregar Copilot en VS (Github Copilot Chat)
+4. Agregar Copilot en VS (Github Copilot Chat)
 
-5- Chat Copilot: Armado de workflow (test, build, cache)
+5. Chat Copilot: Armado de workflow (test, build, cache)
 
-6- Push and run workflow
+6. Push and run workflow
 
 
 ## Demo 1.2 - Pipeline CI/CD inteligentes
 
-1- Agregar datos de .env de este repositorio
+1. Clonar este repo en local
+
+
+2. Agregar datos de .env de este repositorio
     
-    REPO=tuusuario/tuforkrepo   # Repositorio Privado Demo 1
-    RUNNER_TOKEN=token_valido   # Token para self-hosted runner
+       REPO=tuusuario/tuforkrepo   # Repositorio Privado Demo 1
+       RUNNER_TOKEN=token_valido   # Token para self-hosted runner
 
-2- Levantar dockers
+3. Levantar dockers
 
-    docker-compose -f docker-compose.iarunner.yml build
-    docker-compose -f docker-compose.iarunner.yml up -d
+       docker-compose -f docker-compose.iarunner.yml build
+       docker-compose -f docker-compose.iarunner.yml up -d
 
-3- Check log runner
+4. Cargar modelo LLM
 
-    docker container logs runner
+       docker exec -it ollama ollama run qwen2.5-coder:1.5b /bye
 
-3- Cargamos modelo LLM
 
-    docker exec -it ollama ollama run qwen2.5-coder:1.5b
+5. Checkpoint
+   - log runner
 
-3- Agregamos step
+         docker container logs runner
+   - ollama
+
+         docker exec -it ollama ollama run qwen2.5-coder:1.5b "como se ejecuta un archivo python?"
+
+
+6. Agregar workflow adicional
+
+    Agregar workflow ubicado en `gh_workflow\build.yml` en el repositorio privado de la Demo anterior.
+
+7. Hacer fallar tests y subir cambio
+
+    Modificar aplicativo para que el resultado sea erroneo.
+
 
 
 # Demos - Parte 2
-1- Validar consistencia terraform plan output
-2- Generar con IA readme documentando los componentes de la arquitectura a desplegar
+1. Validar consistencia terraform plan output
+2. Generar con IA readme documentando los componentes de la arquitectura a desplegar
 
 ## Demo 2.2 - Assitente DevOps
 
-1- Levantar dockers
+1. Levantar dockers
 
-    docker-compose -f docker-compose.n8n.yml build
-    docker-compose -f docker-compose.n8n.yml up -d
+       docker-compose -f docker-compose.n8n.yml build
+       docker-compose -f docker-compose.n8n.yml up -d
 
-2- Check docke ps command
+2. Check docker ps command
 
-    docker exec -it n8n docker ps
+       docker exec -it n8n docker ps
 
-3- Acceder URL y registrarse
+3. Acceder URL y registrarse
 
-http://localhost:5678
+   http://localhost:5678
 
 
-4- Importar workflow
+4. Importar workflow
 
-Archivo: `n8n_workflow\docker_assistant.json`
+   Utilzar archivo: `n8n_workflow\docker_assistant.json`
 
 
 # Demos - Parte 3

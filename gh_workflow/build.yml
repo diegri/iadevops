@@ -1,0 +1,99 @@
+name: build_assistant
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: temurin
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Build with Maven
+        id: mvn-build
+        run: |
+            echo "Building the project..."    
+            handle_error() {
+                echo "FAILED: line $1, exit code $2"
+                cat output.log
+                exit 1
+            }
+            
+            trap 'handle_error $LINENO $?' ERR 
+            mvn clean install > output.log
+            cat output.log
+            echo "Build succeeded!"
+
+      - name: Persist logs
+        if: ${{ failure() && steps.mvn-build.outcome == 'failure' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs
+          path: output.log
+
+  error-handler:
+    runs-on: self-hosted
+    needs: build
+    if: ${{ always() && contains(needs.build.result, 'failure') }}
+    steps:
+      - name: Get artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: logs
+      - name: Check error
+        run: |
+            echo "Local files:" 
+            ls -lrt
+            #echo "Error log:"
+            #cat output.log
+            # Capturar erorres de la salida de la consola
+            logError=$(cat output.log | tail -n 30  | jq -Rsa . )
+
+            # Armar el request para la API de Ollama
+            request='{
+                "model": "qwen2.5-coder:1.5b",
+                "prompt": "Cual es el error en el log?",
+                "messages": [
+                {
+                    "role": "user",
+                    "content": '$logError'
+                }
+                ],
+                "stream": false
+            }'
+
+            #echo $request | jq -r '.messages[0].content'
+
+            # Llamar a la API de Ollama
+            response=$(curl http://ollama:11434/api/chat -s -d "$request")
+
+            # Imprimir el resultado
+            errormsg=$(echo "$response" | jq -r '.message.content')
+            echo "$errormsg"
+            echo "$errormsg" >> $GITHUB_STEP_SUMMARY
+           
+               
+
+
