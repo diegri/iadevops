@@ -43,7 +43,7 @@
 
 4. Cargar modelo LLM
 
-       docker exec -it ollama ollama run qwen2.5-coder:1.5b /bye
+       docker exec -it ollama ollama run qwen2.5-coder:1.5b
 
 
 5. Checkpoint
@@ -95,6 +95,12 @@
 4. Importar workflow
 
    Utilzar archivo: `n8n_workflow\docker_assistant.json`
+
+
+5. Obtener API key
+
+
+6. Chatear con asistente
 
 
 # Demos - Parte 3
@@ -186,3 +192,11 @@ Caso 3:
 
 
 
+## n8n
+
+### Docker config
+
+## Grant group access to docker service
+docker exec --user root -it n8n chown root:docker /var/run/docker.sock
+docker exec --user root -it n8n chmod g+w /var/run/docker.sock
+docker exec --user root -it n8n ls -lrt /var/run/docker.sock
