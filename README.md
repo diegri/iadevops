@@ -3,7 +3,7 @@
 - Cuenta GitHub. Se utilizarán funciones de Copilot gratuito
 - Nociones de git
 - Consola Git Bash (Opcional)
-- Visual Studio Code (Opcional)
+- Visual Studio Code (o portable)
 
 # Demos - Parte 1
 
@@ -69,12 +69,7 @@
 
 ## Demo 2.1. Validar consistencia terraform plan output
 
-!!
-
-## Demo 2.1b Generar con IA readme documentando los componentes de la arquitectura a desplegar
-
-!!
-
+N/A
 
 ## Demo 2.2 - Assitente DevOps
 
@@ -99,25 +94,31 @@
 
 5. Obtener API key
 
+    Obtener API Key de google gemini y configurar en workflow.
 
 6. Chatear con asistente
 
 
 # Demos - Parte 3
 
-## Demo 3.1 - Monitoreo inteligente
+## Demo 3.1 - Simulación de fallo y análisis root cause
 
-1. Levantar dockers
+1. Levantar dockers 
 
-       docker-compose -f .\docker-compose.monitoring.yml up -d
+       cd ai-flame-grahp
+       docker compose up --build
 
+2. Acceder a grafana
 
+       http://localhost:3000/
 
-## Demo 3.2 - ??
+3. Configurar API key
 
+    Acceder en Plugins -> LLM
 
+4. Pedir a IA que explique error
 
-
+    Acceder a Profiles->Flame Grahp->Explain
 
 # Notas o referencias
 
