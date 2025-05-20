@@ -21,11 +21,11 @@ def check_driver_availability(n):
     while time.time() - start_time < n * DRIVER_AVAILABILITY_MULTIPLIER:
         i += 1
 
-    # Every 4 minutes this will artificially create make requests in eu-north region slow
+    # Every 3 minutes this will artificially create make requests in eu-north region slow
     # this is just for demonstration purposes to show how performance impacts show up in the
     # flamegraph
 
-    force_mutex_lock = datetime.today().minute * 4 % 8 == 0
+    force_mutex_lock = datetime.today().minute % 3 == 0 
     if os.getenv("REGION") == "eu-north" and force_mutex_lock:
         mutex_lock(n)
 
