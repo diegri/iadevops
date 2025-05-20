@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  llm:
+    build:
+      context: .\llm-cli
+      dockerfile: Dockerfile
+    container_name: llm-cli
+    volumes:
+      # - ./llm_config:/root/.llm
+      - ./llm-cli/llm-files:/workspace
+    #environment:
+    #  - LLM_GOOGLE_API_KEY=${GEMINI_KEY}
+    tty: true

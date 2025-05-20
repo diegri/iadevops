@@ -52,7 +52,7 @@
          docker container logs runner
    - ollama
 
-         docker exec -it ollama ollama run qwen2.5-coder:1.5b "como se ejecuta un archivo python?"
+         docker exec -it ollama ollama run qwen2.5-coder:1.5b "Cuenta un chiste sobre DevOps"
 
 
 6. Agregar workflow adicional
@@ -69,7 +69,30 @@
 
 ## Demo 2.1. Validar consistencia terraform plan output
 
-N/A
+1. Levantar docker
+
+       docker-compose -f docker-compose.llm.yml up -d --build
+
+2. Acceder a consola
+
+       docker exec -it llm-cli /bin/bash
+
+3. Set gemini key
+    
+    Al ejecutar el siguiente comando solicita la key de gemini
+
+        llm keys set gemini
+
+4. Definir modelo a utilizar
+
+        llm models default gemini-2.0-flash
+
+5. Ejecutar consultas
+
+        llm "Dime un chiste sobre DevOps"
+
+        llm 'indica como resolver el error' -a apply-output.txt
+
 
 ## Demo 2.2 - Assitente DevOps
 
